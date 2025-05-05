@@ -4,7 +4,6 @@ require("./database/connection.js");
 
 app.get("/books", function (req, res) {
   //logic to fetch books from database
-  users.findAll();
   res.json({
     message: "Books fetched successfully",
   });
