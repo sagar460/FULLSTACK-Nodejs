@@ -19,5 +19,10 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.books = require("./models/book.model.js")(sequelize, DataTypes);
 db.users = require("./models/user.model.js")(sequelize, DataTypes);
+db.products = require("./models/product.model.js")(sequelize, DataTypes);
 
+//migrate code chai yo ho hai
+sequelize.sync({ force: false }).then(() => {
+  console.log("Migrate successfully done");
+});
 module.exports = db;
