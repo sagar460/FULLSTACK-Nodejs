@@ -1,39 +1,27 @@
 const express = require("express");
+
 const { books } = require("./database/connection.js");
+const {
+  fetchBooks,
+  addBook,
+  deleteBook,
+  updateBook,
+  fetchSingleBook,
+} = require("./controllers/bookController.js");
+
 const app = express();
 require("./database/connection.js");
 
+const bookRoute = require("./routes/bookRoute.js");
+
 app.use(express.json());
 
-app.get("/books", async function (req, res) {
-  //logic to fetch books from database
-  const datas = await books.findAll();
-  res.json({
-    message: "Books fetched successfully",
-    datas,
-  });
-});
-app.post("/books", async function (req, res) {
-  //logic to add new books to database goes here..
-  //console.log(req.body)
-  //const bookName=req.body.bookName
-  //const bookPrice=req.body.bookPrice
-  const { bookName, bookPrice, bookAuthor, bookGenre } = req.body;
-  await books.create({
-    bookName,
-    bookPrice,
-    bookAuthor,
-    bookGenre,
-  });
-  res.json({
-    message: "Books added successfully",
-  });
-});
-app.patch("/books/:id", function (req, res) {
-  res.json({
-    message: "book updated successfully",
-  });
-});
+app.use("/api/", bookRoute);
+
+// app.get("/books", fetchBooks);
+// app.post("/books", addBook);
+// app.delete("/books/:id", deleteBook);
+// app.patch("/books/:id", updateBook);
 
 app.listen(3000, function () {
   console.log("server has started at port 3000");
