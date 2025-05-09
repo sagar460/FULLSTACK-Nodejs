@@ -27,12 +27,34 @@ exports.addBook = async function (req, res) {
 };
 
 exports.deleteBook = async function (req, res) {
-  res.json({
-    message: "book updated successfully",
-  });
+  const id = req.params.id; //const {id}=req.params
+  try {
+    const deleted = await books.destroy({
+      where: { id: id },
+    });
+    if (deleted) {
+      res.json({ message: "Book deleted successfully" });
+    } else {
+      res.status(404).json({ message: "Book not found" });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "An error occurred", error: error.message });
+  }
 };
 
 exports.updateBook = async function (req, res) {
+  const id = req.params.id;
+  const { bookName, bookPrice, bookAuthor, bookGenre } = req.body;
+  await books.update(
+    { bookName, bookPrice, bookAuthor, bookGenre },
+    {
+      where: {
+        id, //same key and value
+      },
+    }
+  );
   res.json({
     message: "book updated successfully",
   });
