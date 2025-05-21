@@ -1,18 +1,15 @@
 const express = require("express");
-
-const { books } = require("./database/connection.js");
-const {
-  fetchBooks,
-  addBook,
-  deleteBook,
-  updateBook,
-  fetchSingleBook,
-} = require("./controllers/bookController.js");
+const bookRoute = require("./routes/bookRoute.js");
+const cors = require("cors");
 
 const app = express();
 require("./database/connection.js");
 
-const bookRoute = require("./routes/bookRoute.js");
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 
 app.use(express.json());
 
