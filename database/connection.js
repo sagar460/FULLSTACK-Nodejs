@@ -1,4 +1,4 @@
-//hami ya database connection ko code /logic lekhcham
+// This is database connection code /here we write logic
 
 const { Sequelize, DataTypes } = require("sequelize");
 

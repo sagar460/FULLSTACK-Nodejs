@@ -20,7 +20,7 @@ app.use("/api/", bookRoute);
 // app.delete("/books/:id", deleteBook);
 // app.patch("/books/:id", updateBook);
 
-app.listen(3000, function () {
+app.listen(process.env.PORT, function () {
   console.log("server has started at port 3000");
 });
 
