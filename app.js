@@ -4,23 +4,22 @@ const cors = require("cors");
 
 const app = express();
 require("./database/connection.js");
+app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "*",
   })
 );
 
-app.use(express.json());
-
-app.use("/api/", bookRoute);
+app.use("/api/books", bookRoute);
 
 // app.get("/books", fetchBooks);
 // app.post("/books", addBook);
 // app.delete("/books/:id", deleteBook);
 // app.patch("/books/:id", updateBook);
 
-app.listen(process.env.PORT, function () {
+app.listen(3000, function () {
   console.log("server has started at port 3000");
 });
 
